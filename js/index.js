@@ -27,13 +27,10 @@ function handleRoute() {
             renderCreateCharacter();
             break;
         default:
-            // Ruta no encontrada
             app.innerHTML = `<h1>Ruta no encontrada</h1>`;
     }
 }
 
-// Escuchar los cambios de ruta
 window.addEventListener("popstate", handleRoute);
 
-// Inicializar la aplicación
 handleRoute();
