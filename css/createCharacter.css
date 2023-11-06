@@ -33,15 +33,23 @@
     max-height: 100px; /* Tamaño máximo para las imágenes del atuendo */
 }
 
-#save-outfit-button {
-    background-color: #5bc0de;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    padding: 10px 20px;
-    font-weight: bold;
-    margin-top: 20px;
+#save-outfit-button,
+#comeBack-button {
+  padding: 10px 20px; /* Espacio interior para los botones */
+  background-color: #3498db; /* Color de fondo del botón */
+  color: #fff; /* Color del texto del botón */
+  border: none; /* Elimina el borde del botón */
+  border-radius: 5px; /* Borde redondeado */
+  cursor: pointer; /* Cambia el cursor al pasar por encima del botón */
+  margin: 0 10px; /* Espacio entre los botones */
+}
+
+#save-outfit-button:hover {
+    background-color: #57b929;
+}
+
+#comeBack-button:hover {
+    background-color: #f52a2a;
 }
 
 .outfit-builder {
