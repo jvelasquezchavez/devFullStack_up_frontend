@@ -9,5 +9,5 @@ loginButton.addEventListener('click', () => {
     else if (!password)
         alert('Por favor, complete la contraseña.');
     else
-        window.location.href = `nextView.html?username=${encodeURIComponent(username)}`;
+        window.location.href = `../views/home.html?username=${encodeURIComponent(username)}`;
 });

@@ -1,6 +1,7 @@
 const selectButtons = document.querySelectorAll('.select-button');
-let imagenSeleccionada = 'ruta_de_la_imagen_seleccionada.jpg';
-
+let imagenSeleccionada = '';
+const username = urlParams.get('username');
+//selectedCharacterImage.src = `../../imgs/${username}.png`;
 let isCharacterSelected = false; // Variable para realizar un seguimiento de la selección del personaje
 
 function resetButtons() {
