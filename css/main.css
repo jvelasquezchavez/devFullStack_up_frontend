@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=News+Cycle:wght@400;700&display=swap');
+
+h1{
+    color: white;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+}
+
+h2{
+    color: black;
+    font-size: 24px;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+    text-align: center;
+}
+
+header{
+    height: 200px;
+    background-color: blueviolet;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    background-color: yellow;
+}
+.personajes{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+.personaje{
+    width: 30%;
+    height: 450px;
+    background-color: cadetblue;
+}
+
+footer{
+    display: flex;
+    flex-direction: row;
+}
+
+.contact{
+    background-color: red;
+    color:white;
+    padding: 0 0 0 20px;
+    width: 50%;
+}
+
+ul{
+    list-style: none;
+    width: 50%;
+}
+
+li{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.social-img{
+    width: 32px;
+    margin: 10px;
+}
