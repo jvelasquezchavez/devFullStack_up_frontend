@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Página Principal</title>
+  <link rel="stylesheet" type="text/css" href="../../css/home.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Selecciona un Personaje</h1>
+        <div class="character-row">
+            <!-- Primera Fila -->
+            <div class="character">
+                <img src="../../imgs/thor.png" alt="Personaje 1">
+                <h2>Thor</h2>
+                <button class="select-button" data-character="1">Seleccionar</button>
+            </div>
+            <div class="character">
+                <img src="../../imgs/ironman.png" alt="Personaje 2">
+                <h2>Iron Man</h2>
+                <button class="select-button" data-character="2">Seleccionar</button>
+            </div>
+        </div>
+        <div class="character-row">
+            <!-- Segunda Fila -->
+            <div class="character">
+                <img src="../../imgs/cap.png" alt="Personaje 3">
+                <h2>Capitan A</h2>
+                <button class="select-button" data-character="3">Seleccionar</button>
+            </div>
+            <div class="character">
+                <img src="../../imgs/hulk.png" alt="Personaje 4">
+                <h2>Hulk</h2>
+                <button class="select-button" data-character="4">Seleccionar</button>
+            </div>
+        </div>
+        <button id="create-character-button">Crear Personaje</button>
+    </div>
+    <script src="../components/home.js"></script>
+</body>
+</html>
