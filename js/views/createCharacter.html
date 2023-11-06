@@ -1,16 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Crear Personaje</title>  
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="../../css/createCharacter.css">
-</head>
+    <head>
+        <title>Crear Personaje</title>  
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../../css/createCharacter.css">
+    </head>
 <body>
-  <h1>Crear Personaje</h1>
-  <form>
-    <input type="text" name="nombre" placeholder="Nombre">
-    <input type="text" name="face" placeholder="Rostro">
-    <button type="submit">Crear Personaje</button>
-  </form>
+    <div class="container">
+        <h1>Construir Atuendo del Día</h1>
+        <div class="character-preview">
+            <img id="selected-character" src="../../imgs/cap.png" alt="Personaje Seleccionado">
+            <div id="outfit-overlay" class="outfit-overlay">
+                <div class="outfit-display">
+                    <img id="top-image" src="" alt="Parte Superior">
+                    <img id="bottom-image" src="" alt="Parte Inferior">
+                    <img id="shoes-image" src="" alt="Zapatos">
+                </div>
+                <button id="save-outfit-button">Guardar Atuendo</button>
+            </div>
+        </div>
+        <div class="outfit-builder">
+            <div class="outfit-section">
+                <h3>Parte Superior</h3>
+                <div class="outfit-carousel" id="top-carousel">
+                    <img src="../../imgs/diez.png" alt="Parte Superior 1">
+                    <img src="../../imgs/azul.png" alt="Parte Superior 2">
+                    <img src="../../imgs/remeraV.png" alt="Parte Superior 3">
+                    <img src="../../imgs/camisa.png" alt="Parte Superior 4">
+                </div>
+            </div>
+            <div class="outfit-section">
+                <h3>Parte Inferior</h3>
+                <div class="outfit-carousel" id="bottom-carousel">
+                    <img src="../../imgs/bermuda.png" alt="Parte Inferior 1">
+                    <img src="../../imgs/jean.png" alt="Parte Inferior 2">
+                    <img src="../../imgs/cargo.png" alt="Parte Inferior 3">
+                    <img src="../../imgs/malla.png" alt="Parte Inferior 4">
+                </div>
+            </div>
+            <div class="outfit-section">
+                <h3>Zapatos</h3>
+                <div class="outfit-carousel" id="shoes-carousel">
+                    <img src="../../imgs/parAmarillo.png" alt="Zapatos 1">
+                    <img src="../../imgs/parBotines.png" alt="Zapatos 2">
+                    <img src="../../imgs/parMoca.png" alt="Zapatos 3">
+                    <img src="../../imgs/parZapatilla.png" alt="Zapatos 4">
+                </div>
+            </div>
+        </div>
+        <button id="save-outfit-button">Guardar Atuendo</button>
+    </div>
+    <script src="../components/createCharacter.js"></script>
 </body>
 </html>
