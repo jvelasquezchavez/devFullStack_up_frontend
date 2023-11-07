@@ -1,9 +1,8 @@
 const selectButtons = document.querySelectorAll('.select-button');
 let imagenSeleccionada = '';
+const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get('username');
-//selectedCharacterImage.src = `../../imgs/${username}.png`;
-let isCharacterSelected = false; // Variable para realizar un seguimiento de la selección del personaje
-
+let isCharacterSelected = false;
 function resetButtons() {
     selectButtons.forEach(button => {
         button.textContent = 'Seleccionar';
@@ -44,8 +43,12 @@ selectButtons.forEach(button => {
 const createCharacterButton = document.getElementById('create-character-button');
 createCharacterButton.addEventListener('click', () => {
     if (isCharacterSelected) {
-        window.location.href = `../views/createCharacter.html?imagen=${encodeURIComponent(imagenSeleccionada)}`;
+        
+        window.location.href = `../views/createCharacter.html?imagen=${encodeURIComponent(imagenSeleccionada)}?username=${encodeURIComponent(username)}`;
     } else {
         alert('Por favor, seleccione un personaje antes de continuar.');
     }
 });
+
+const exitButton = document.getElementById('exit-button');
+exitButton.addEventListener('click', () => { window.location.href = `../views/login.html`; });
