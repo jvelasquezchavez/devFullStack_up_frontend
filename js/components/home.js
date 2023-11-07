@@ -52,3 +52,58 @@ createCharacterButton.addEventListener('click', () => {
 
 const exitButton = document.getElementById('exit-button');
 exitButton.addEventListener('click', () => { window.location.href = `../views/login.html`; });
+
+
+const imageColumnsContainer = document.getElementById('imageColumns');
+
+async function loadImages() {
+    try {
+        const result = await getImagesFromEndpoint();
+        console.log(result);
+        
+        if (result.hasError)
+            return `<h3>No hay personajes creados</h3>`;        
+
+        const columnsHTML = result.data.forEach(item => {
+            const columnHTML = generateColumn(item);
+            const columnElement = document.createElement('div');
+            columnElement.classList.add('column');
+            columnElement.innerHTML = columnHTML;
+            imageColumnsContainer.appendChild(columnElement);
+        });
+        return `<div class="column">${columnsHTML}</div>`;
+    } catch (error) {
+        console.error('Error al cargar imágenes:', error);
+    }
+}
+
+function generateColumn(item) {
+    const imageFace = item.face;
+    const imageTop = item.top;
+    const imageBottom = item.bottom;
+    const imageShoes = item.shoes;
+
+    return `
+        <div class="image-container">
+            <img src="../../imgs/${imageFace}.png" alt="${imageFace}">
+            <img src="../../imgs/${imageTop}.png" alt="${imageTop}">
+            <img src="../../imgs/${imageBottom}.png" alt="${imageBottom}">
+            <img src="../../imgs/${imageShoes}.png" alt="${imageShoes}">
+        </div>
+    `;
+}
+
+async function getImagesFromEndpoint() {
+    
+    const requestOptions = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZW1haWxAcHJ1ZWJhMi5jb20iLCJuYW1lIjoiUmV5IGxlb24iLCJsYXN0bmFtZSI6Ik11ZmFzYSIsImlzQWN0aXZlIjp0cnVlLCJyb2xlcyI6WyJ1c2VyIl0sImNyZWF0ZWRBdCI6IjIwMjMtMTEtMDRUMDc6NDM6MjEuOTgxWiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMDRUMDc6NDM6MjEuOTgxWiIsIl9fdiI6MCwiaWQiOiI2NTQ1ZjYxOWFhMGIwZTFhNTZmNmVkMjkifSwiaWF0IjoxNjk5MzI1MDM5LCJleHAiOjE2OTk0MTE0Mzl9.flLQl47e_i8RbIJRdZ7LTMuQdXpcf08NL6-Yn382XZw'},
+    };
+
+    let result = await fetch('http://localhost:5000/endp/character', requestOptions);
+
+    return await result.json();
+
+}
+
+loadImages();

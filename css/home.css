@@ -115,3 +115,9 @@ h2 {
         width: 45%;
     }
 }
+
+.column {
+    width: 200px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
