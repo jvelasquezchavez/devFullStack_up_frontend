@@ -1,4 +1,5 @@
 // Obtén elementos del DOM
+
 const topSelect = document.getElementById('top-carousel');
 const bottomSelect = document.getElementById('bottom-carousel');
 const shoesSelect = document.getElementById('shoes-carousel');
@@ -11,57 +12,79 @@ const saveOutfitButton = document.getElementById('save-outfit-button');
 const volverButton = document.getElementById('comeBack-button');
 const urlParams = new URLSearchParams(window.location.search);
 const imagenSeleccionada = urlParams.get('imagen');
-selectedCharacterImage.src = `../../imgs/${imagenSeleccionada}.png`;
-// Obtén elementos del carrusel de selección de "Parte Superior"
-const topCarouselImages = document.querySelectorAll('#top-carousel img');
-
-// Agrega un controlador de eventos de clic a cada imagen en el carrusel
-topCarouselImages.forEach(image => {
-    image.addEventListener('click', () => {
-        // Obtiene la fuente (URL) de la imagen clicada
-        const selectedImageSrc = image.getAttribute('src');
-
-        // Asigna la fuente de la imagen de la "Parte Superior" en la vista del atuendo
-        topImage.src = selectedImageSrc;
-    });
-});
-
-// Evento para mostrar la vista del atuendo
-function showOutfitView() {
-    outfitOverlay.style.display = 'block';
-}
-
-// Evento para ocultar la vista del atuendo
-function hideOutfitView() {
-    outfitOverlay.style.display = 'none';
-}
-
-// Evento para actualizar el atuendo cuando se selecciona algo
-topSelect.addEventListener('change', () => {
-    updateOutfit();
-});
-
-bottomSelect.addEventListener('change', () => {
-    updateOutfit();
-});
-
-shoesSelect.addEventListener('change', () => {
-    updateOutfit();
-});
+selectedCharacterImage.src = `../../imgs/${imagenSeleccionada.split('?')[0]}.png`;
+let selectedTopImage = null;
+let selectedBottomImage = null;
+let selectedShoesImage = null;
 
 volverButton.addEventListener('click', () => {
     window.location.href = '../views/home.html';
 });
-// Evento para guardar el atuendo
-saveOutfitButton.addEventListener('click', () => {
-    alert('Atuendo guardado en el sistema.');
-    hideOutfitView();
+
+saveOutfitButton.addEventListener('click', async function(e){
+    e.preventDefault();
+    alert(selectedTopImage + selectedBottomImage + selectedShoesImage)
+    if (!selectedTopImage)
+        alert('Por favor, elija la parte superior.');
+    else if (!selectedBottomImage)
+        alert('Por favor, elija la parte inferior.');
+    else if (!selectedShoesImage)
+        alert('Por favor,  elija calzado.');
+    else{
+        const result = await saveCharacter(selectedTopImage, selectedBottomImage, selectedShoesImage);
+        console.log(result);
+        if (!result.hasError)
+            window.location.href = `../views/home.html?username=${encodeURIComponent(username)}`;
+        else
+            alert(result.data);
+    }
 });
 
-// Llama a la función updateOutfit al cargar la página para mostrar el atuendo inicial
-updateOutfit();
+const saveCharacter = async (selectedTopImage, selectedBottomImage, selectedShoesImage)=>{
+    const data = {
+        name: imagenSeleccionada,
+        face: selectedCharacterImage.src,
+        top: selectedTopImage,
+        bottom: selectedBottomImage,
+        shoes: selectedShoesImage,
+        isDefault: false
+    };
+    
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer: ' + ''},
+        body: JSON.stringify(data),
+    };
 
-// Evento para mostrar la vista del atuendo sobre la imagen del personaje
-selectedCharacterImage.addEventListener('click', () => {
-    showOutfitView();
-});
+    let result = await fetch('http://localhost:5000/endp/character', requestOptions);
+
+    return await result.json();
+}
+
+const topCarousel = document.getElementById('top-carousel');
+const bottomCarousel = document.getElementById('bottom-carousel');
+const shoesCarousel = document.getElementById('shoes-carousel');
+
+function handleImageClick(event) {    
+    const selectedImageSrc = event.target.getAttribute('src');
+    const targetCarousel = event.currentTarget;
+
+    if (targetCarousel === topCarousel) {
+        selectedTopImage = selectedImageSrc;
+    } else if (targetCarousel === bottomCarousel) {
+        selectedBottomImage = selectedImageSrc;
+    } else if (targetCarousel === shoesCarousel) {
+        selectedShoesImage = selectedImageSrc;
+    }
+
+    const images = targetCarousel.querySelectorAll('img');
+    images.forEach(img => {
+        img.classList.remove('selected');
+    });
+    
+    event.target.classList.add('selected');
+}
+
+topCarousel.addEventListener('click', handleImageClick);
+bottomCarousel.addEventListener('click', handleImageClick);
+shoesCarousel.addEventListener('click', handleImageClick);
