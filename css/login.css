@@ -6,7 +6,17 @@ body {
 }
 
 .container {
-    max-width: 400px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.container2 {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -48,4 +58,21 @@ button:hover {
         max-width: 100%;
         padding: 10px;
     }
+}
+
+img {
+    max-width: 300%;
+    border-radius: 20px;
+}
+
+.column {
+    display: inline-block;
+    max-width: 200px;
+    margin-right: 80px;
+}
+
+.image-container {
+    max-width: 50px;
+    max-height: 50px;
+    margin-right: 100px;
 }

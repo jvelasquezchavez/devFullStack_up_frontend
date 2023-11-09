@@ -4,6 +4,18 @@
     max-height: 400px;
 }
 
+#top-carousel img.selected {
+    border: 4px solid green;
+}
+
+#bottom-carousel img.selected {
+    border: 4px solid green;
+}
+
+#shoes-carousel img.selected {
+    border: 4px solid green;
+}
+
 
 .character-preview {
     text-align: center;
@@ -17,7 +29,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente */
+    background-color: rgba(255, 255, 255, 0.9);
     text-align: center;
     z-index: 1;
 }
@@ -29,19 +41,19 @@
 }
 
 .outfit-display img {
-    max-width: 100px; /* Tamaño máximo para las imágenes del atuendo */
-    max-height: 100px; /* Tamaño máximo para las imágenes del atuendo */
+    max-width: 100px;
+    max-height: 100px;
 }
 
 #save-outfit-button,
 #comeBack-button {
-  padding: 10px 20px; /* Espacio interior para los botones */
-  background-color: #3498db; /* Color de fondo del botón */
-  color: #fff; /* Color del texto del botón */
-  border: none; /* Elimina el borde del botón */
-  border-radius: 5px; /* Borde redondeado */
-  cursor: pointer; /* Cambia el cursor al pasar por encima del botón */
-  margin: 0 10px; /* Espacio entre los botones */
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
 }
 
 #save-outfit-button:hover {
@@ -81,13 +93,13 @@
 }
 
 .outfit-carousel img {
-    max-width: 100px; /* Tamaño máximo para las imágenes del carrusel */
-    max-height: 100px; /* Tamaño máximo para las imágenes del carrusel */
+    max-width: 100px;
+    max-height: 100px;
     margin: 0 10px;
     cursor: pointer;
     transition: transform 0.3s;
 }
 
 .outfit-carousel img:hover {
-    transform: scale(1.2); /* Efecto de escala al pasar el mouse por encima */
+    transform: scale(1.2);
 }
