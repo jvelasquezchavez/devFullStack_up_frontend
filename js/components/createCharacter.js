@@ -12,14 +12,16 @@ const saveOutfitButton = document.getElementById('save-outfit-button');
 const volverButton = document.getElementById('comeBack-button');
 const urlParams = new URLSearchParams(window.location.search);
 const imagenSeleccionada = urlParams.get('imagen');
-const username = imagenSeleccionada.split('=')[1];//tuve que hacerlo, por alguna razón urlParams.get('username') devolvía null/undefined
+const tokenExt = imagenSeleccionada.split('=')[1].split('?')[0];
+console.log(tokenExt);
+const username = imagenSeleccionada.split('=')[2];
 selectedCharacterImage.src = `../../imgs/${imagenSeleccionada.split('?')[0]}.png`;
 let selectedTopImage = null;
 let selectedBottomImage = null;
 let selectedShoesImage = null;
 
 volverButton.addEventListener('click', () => {
-    window.location.href = '../views/home.html';
+    window.location.href = `../views/home.html?username=${encodeURIComponent(username)}?token=${encodeURIComponent(tokenExt)}`;
 });
 
 saveOutfitButton.addEventListener('click', async function(e){
@@ -34,7 +36,7 @@ saveOutfitButton.addEventListener('click', async function(e){
         const result = await saveCharacter(selectedTopImage, selectedBottomImage, selectedShoesImage);
         console.log(result);
         if (!result.hasError)
-            window.location.href = `../views/home.html?username=${encodeURIComponent(username)}`;
+            window.location.href = `../views/home.html?username=${encodeURIComponent(username)}?token=${encodeURIComponent(tokenExt)}`;
         else
             alert(result.data);
     }
@@ -52,7 +54,7 @@ const saveCharacter = async (selectedTopImage, selectedBottomImage, selectedShoe
     
     const requestOptions = {
         method: 'POST',
-        headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${username}`},
+        headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${tokenExt}`},
         body: JSON.stringify(data),
     };
 
@@ -90,3 +92,9 @@ function handleImageClick(event) {
 topCarousel.addEventListener('click', handleImageClick);
 bottomCarousel.addEventListener('click', handleImageClick);
 shoesCarousel.addEventListener('click', handleImageClick);
+loadUsername();
+
+function loadUsername() {
+    const h1Element = document.getElementById("resultadoUsername");
+    h1Element.textContent = 'Hola: ' + username;
+}
