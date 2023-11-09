@@ -4,6 +4,12 @@
     max-height: 400px;
 }
 
+.atuendo img{
+    text-align: center;
+    max-width: 100px;
+    max-height: 100px;
+}
+
 #top-carousel img.selected {
     border: 4px solid green;
 }

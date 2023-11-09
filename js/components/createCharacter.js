@@ -13,7 +13,6 @@ const volverButton = document.getElementById('comeBack-button');
 const urlParams = new URLSearchParams(window.location.search);
 const imagenSeleccionada = urlParams.get('imagen');
 const tokenExt = imagenSeleccionada.split('=')[1].split('?')[0];
-console.log(tokenExt);
 const username = imagenSeleccionada.split('=')[2];
 selectedCharacterImage.src = `../../imgs/${imagenSeleccionada.split('?')[0]}.png`;
 let selectedTopImage = null;
@@ -67,12 +66,12 @@ const topCarousel = document.getElementById('top-carousel');
 const bottomCarousel = document.getElementById('bottom-carousel');
 const shoesCarousel = document.getElementById('shoes-carousel');
 
-function handleImageClick(event) {    
+function handleImageClick(event) {
     const filePath = event.target.getAttribute('src');
+    if (filePath == null) return;
     const parts = filePath.split('/');
     const selectedImageSrc = parts.pop().split('.')[0];
     const targetCarousel = event.currentTarget;
-
     if (targetCarousel === topCarousel) {
         selectedTopImage = selectedImageSrc;
     } else if (targetCarousel === bottomCarousel) {
@@ -87,7 +86,32 @@ function handleImageClick(event) {
     });
     
     event.target.classList.add('selected');
+    mostrarOcultarImagen();
 }
+
+
+function mostrarOcultarImagen() {
+    const personaje = document.getElementById('personaje');
+    const parteSuperior = document.getElementById('parteSuperior');
+    const parteInferior = document.getElementById('parteInferior');
+    const zapatos = document.getElementById('zapatos');
+    personaje.src = `../../imgs/${imagenSeleccionada.split('?')[0]}.png`;
+    personaje.style.display = 'block';
+
+    if (selectedTopImage){
+        parteSuperior.style.display = 'block';
+        parteSuperior.src = `../../imgs/${selectedTopImage}.png`;
+    }
+    if (selectedBottomImage){
+        parteInferior.style.display = 'block';
+        parteInferior.src = `../../imgs/${selectedBottomImage}.png`;
+    }
+    if (selectedShoesImage){
+        zapatos.style.display = 'block';
+        zapatos.src = `../../imgs/${selectedShoesImage}.png`;
+    }
+    
+  }
 
 topCarousel.addEventListener('click', handleImageClick);
 bottomCarousel.addEventListener('click', handleImageClick);
@@ -96,5 +120,5 @@ loadUsername();
 
 function loadUsername() {
     const h1Element = document.getElementById("resultadoUsername");
-    h1Element.textContent = 'Hola: ' + username;
+    h1Element.textContent = 'Hola: ' + username + '. Momento de elegir el atuendo de hoy.';
 }
