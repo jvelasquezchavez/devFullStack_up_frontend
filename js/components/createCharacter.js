@@ -12,7 +12,7 @@ const saveOutfitButton = document.getElementById('save-outfit-button');
 const volverButton = document.getElementById('comeBack-button');
 const urlParams = new URLSearchParams(window.location.search);
 const imagenSeleccionada = urlParams.get('imagen');
-const username = urlParams.get('username');
+const username = imagenSeleccionada.split('=')[1];//tuve que hacerlo, por alguna razón urlParams.get('username') devolvía null/undefined
 selectedCharacterImage.src = `../../imgs/${imagenSeleccionada.split('?')[0]}.png`;
 let selectedTopImage = null;
 let selectedBottomImage = null;
@@ -41,12 +41,9 @@ saveOutfitButton.addEventListener('click', async function(e){
 });
 
 const saveCharacter = async (selectedTopImage, selectedBottomImage, selectedShoesImage)=>{
-    const filePath = selectedCharacterImage.src;
-    const parts = filePath.split('/');
-    const selectedImageSrc = parts.pop().split('.')[0];
     const data = {
-        name: imagenSeleccionada,
-        face: selectedImageSrc,
+        name: imagenSeleccionada.split('?')[0],
+        face: imagenSeleccionada.split('?')[0],
         top: selectedTopImage,
         bottom: selectedBottomImage,
         shoes: selectedShoesImage,
@@ -55,7 +52,7 @@ const saveCharacter = async (selectedTopImage, selectedBottomImage, selectedShoe
     
     const requestOptions = {
         method: 'POST',
-        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZW1haWxAcHJ1ZWJhMi5jb20iLCJuYW1lIjoiUmV5IGxlb24iLCJsYXN0bmFtZSI6Ik11ZmFzYSIsImlzQWN0aXZlIjp0cnVlLCJyb2xlcyI6WyJ1c2VyIl0sImNyZWF0ZWRBdCI6IjIwMjMtMTEtMDRUMDc6NDM6MjEuOTgxWiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMDRUMDc6NDM6MjEuOTgxWiIsIl9fdiI6MCwiaWQiOiI2NTQ1ZjYxOWFhMGIwZTFhNTZmNmVkMjkifSwiaWF0IjoxNjk5MzI1MDM5LCJleHAiOjE2OTk0MTE0Mzl9.flLQl47e_i8RbIJRdZ7LTMuQdXpcf08NL6-Yn382XZw'},
+        headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${username}`},
         body: JSON.stringify(data),
     };
 
