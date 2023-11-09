@@ -97,10 +97,10 @@ async function getImagesFromEndpoint() {
     
     const requestOptions = {
         method: 'GET',
-        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoiZW1haWxAcHJ1ZWJhMi5jb20iLCJuYW1lIjoiUmV5IGxlb24iLCJsYXN0bmFtZSI6Ik11ZmFzYSIsImlzQWN0aXZlIjp0cnVlLCJyb2xlcyI6WyJ1c2VyIl0sImNyZWF0ZWRBdCI6IjIwMjMtMTEtMDRUMDc6NDM6MjEuOTgxWiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMDRUMDc6NDM6MjEuOTgxWiIsIl9fdiI6MCwiaWQiOiI2NTQ1ZjYxOWFhMGIwZTFhNTZmNmVkMjkifSwiaWF0IjoxNjk5MzI1MDM5LCJleHAiOjE2OTk0MTE0Mzl9.flLQl47e_i8RbIJRdZ7LTMuQdXpcf08NL6-Yn382XZw'},
+        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + username},
     };
 
-    let result = await fetch('http://localhost:5000/endp/character', requestOptions);
+    let result = await fetch('http://localhost:5000/endp/character/byUser', requestOptions);
 
     return await result.json();
 
