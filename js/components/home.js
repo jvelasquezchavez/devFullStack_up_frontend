@@ -1,7 +1,9 @@
 const selectButtons = document.querySelectorAll('.select-button');
 let imagenSeleccionada = '';
 const urlParams = new URLSearchParams(window.location.search);
-const username = urlParams.get('username');
+const imagenSeleccionada2 = urlParams.get('username');
+const tokenExt = imagenSeleccionada2.split('=')[1].split('?')[0];//tuve que hacerlo, por alguna razón urlParams.get('tokenExt') devolvía null/undefined
+const username = urlParams.get('username').split('?')[0];
 let isCharacterSelected = false;
 function resetButtons() {
     selectButtons.forEach(button => {
@@ -44,7 +46,7 @@ const createCharacterButton = document.getElementById('create-character-button')
 createCharacterButton.addEventListener('click', () => {
     if (isCharacterSelected) {
         
-        window.location.href = `../views/createCharacter.html?imagen=${encodeURIComponent(imagenSeleccionada)}?username=${encodeURIComponent(username)}`;
+        window.location.href = `../views/createCharacter.html?imagen=${encodeURIComponent(imagenSeleccionada)}?token=${encodeURIComponent(tokenExt)}?username=${encodeURIComponent(username)}`;
     } else {
         alert('Por favor, seleccione un personaje antes de continuar.');
     }
@@ -59,7 +61,6 @@ const imageColumnsContainer = document.getElementById('imageColumns');
 async function loadImages() {
     try {
         const result = await getImagesFromEndpoint();
-        console.log(result);
         
         if (result.hasError)
             return `<h3>No hay personajes creados</h3>`;        
@@ -97,7 +98,7 @@ async function getImagesFromEndpoint() {
     
     const requestOptions = {
         method: 'GET',
-        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + username},
+        headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${tokenExt}`},
     };
 
     let result = await fetch('http://localhost:5000/endp/character/byUser', requestOptions);
@@ -107,3 +108,9 @@ async function getImagesFromEndpoint() {
 }
 
 loadImages();
+loadUsername();
+
+function loadUsername() {
+    const h1Element = document.getElementById("resultadoUsername");
+    h1Element.textContent = 'Hola: ' + username;
+} 
