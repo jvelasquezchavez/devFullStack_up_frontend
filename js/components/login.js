@@ -16,9 +16,8 @@ loginForm.addEventListener('submit', async function(e){
         alert('Por favor, complete la contraseña.');
     else{
         const result = await login(username, password);
-        console.log(result);
         if (!result.hasError)
-            window.location.href = `../views/home.html?username=${encodeURIComponent(username)}`;
+            window.location.href = `../views/home.html?username=${encodeURIComponent(result.data)}`;
         else
             alert(result.data);
     }
