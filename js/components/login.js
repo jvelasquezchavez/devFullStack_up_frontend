@@ -2,10 +2,9 @@ const loginButton = document.getElementById('login-button');
 const loginForm = document.getElementById('formLogin');
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("aa");
 });
 
-loginForm.addEventListener('submit', async function(e){
+loginForm.addEventListener('submit', async function(e){    
     e.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -17,7 +16,7 @@ loginForm.addEventListener('submit', async function(e){
     else{
         const result = await login(username, password);
         if (!result.hasError)
-            window.location.href = `../views/home.html?username=${encodeURIComponent(result.data)}`;
+            window.location.href = `../views/home.html?username=${encodeURIComponent(username)}?token=${encodeURIComponent(result.data)}`;
         else
             alert(result.data);
     }
